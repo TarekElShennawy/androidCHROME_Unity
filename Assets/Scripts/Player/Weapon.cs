@@ -5,9 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public Transform firePoint;
-
     public Transform firePoint_crouch;
-
     public Transform firePoint_up;
     public GameObject bulletPrefab;
     public Animator animator;
@@ -19,11 +17,18 @@ public class Weapon : MonoBehaviour
     public bool powerUpEnabler;
 
     public float animationTime = 0.5f;
-    private float cooldownValue = 0f;
+    private float cooldownValue;
+    private float knockbackValue;
+
+    public ScreenShake shaker;
 
     private void Start()
     {
         powerUpEnabler = false;
+
+        cooldownValue = 0f;
+
+        knockbackValue = 2f;
     }
 
     private IEnumerator CrouchShot()
@@ -46,8 +51,9 @@ public class Weapon : MonoBehaviour
 
     private IEnumerator Shoot()
     {
-        animator.SetBool("isShooting", true);
+        //animator.SetBool("isShooting", true);
         audioSource.PlayOneShot(shootingAudio);
+        //controller.KnockbackEffect(knockbackValue);
 
         if(powerUpEnabler)
         {
@@ -59,7 +65,7 @@ public class Weapon : MonoBehaviour
         }
 
         yield return new WaitForSeconds(animationTime);
-        animator.SetBool("isShooting", false);
+        //animator.SetBool("isShooting", false);
     }
 
     private bool WeaponCooldown(float cooldownValue)
@@ -78,21 +84,21 @@ public class Weapon : MonoBehaviour
     {
         cooldownValue -= Time.deltaTime;
 
-        //TODO: Put cooldown value reset in coroutines? maybe.
         if(controller.isCrouching == true && Input.GetButtonDown("Fire1") && WeaponCooldown(cooldownValue)  )
         {
             StartCoroutine(CrouchShot());
-            cooldownValue = .5f;
+            cooldownValue = .1f;
         }
         else if(controller.shootingUp == true && Input.GetButtonDown("Fire1") && WeaponCooldown(cooldownValue))
         {
             StartCoroutine(UpShot());
-            cooldownValue = .5f;
+            cooldownValue = .1f;
         }
         else if(Input.GetButtonDown("Fire1") && WeaponCooldown(cooldownValue))
         {
             StartCoroutine(Shoot());
-            cooldownValue = .5f;
+            StartCoroutine(shaker.Shake()); 
+            cooldownValue = .1f;
         }
     }
 }

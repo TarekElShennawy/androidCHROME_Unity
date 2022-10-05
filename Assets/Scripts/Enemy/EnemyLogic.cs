@@ -13,7 +13,6 @@ public class EnemyLogic : MonoBehaviour
 
     [SerializeField]
     private GameObject HealthObj;
-    private bool hit;
 
     private void Start ()
     {
@@ -31,7 +30,7 @@ public class EnemyLogic : MonoBehaviour
         // 2/3 chance that the health is dropped (if lootDecider is 0 no loot drops, but if 1 or 2 then health drops!)
         if(lootDecider > 0)
         {
-            Instantiate(HealthPot, transform.position, Quaternion.identity);
+           Instantiate(HealthPot, transform.position, Quaternion.identity);
         }
     }
 
@@ -39,11 +38,10 @@ public class EnemyLogic : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-
+        
         //Visual damage effect
         spriteGFX.color = Color.red;
         StartCoroutine(whitecolor());
-
 
         if (health <= 0)
         {

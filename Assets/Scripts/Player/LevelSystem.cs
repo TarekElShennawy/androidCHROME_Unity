@@ -20,7 +20,7 @@ public class LevelSystem : MonoBehaviour
         level = 1;
         experienceRequired = 10;
 
-        levelUI.text = "Level: " + level.ToString();
+        levelUI.text = "Lv. " + level.ToString();
 
     }
     //TODO: GET RID OF MAGIC NUMBERS BOTH HERE AND IN THE ENEMY LOGIC WHEN ADDING THE EXP!!

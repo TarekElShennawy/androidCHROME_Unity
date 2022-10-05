@@ -20,6 +20,10 @@ public class MovementController : MonoBehaviour
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
+    //TODO: clear up audio into it's own script
+    public AudioSource playerAudioSource;
+    public AudioClip jumpSFX;
+    public AudioClip doubleJumpSFX;
     private Rigidbody2D _rigidbody;
     private BoxCollider2D coll;
     [SerializeField] private LayerMask groundLayer;
@@ -71,6 +75,15 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    //Work In Progress TODO: method running but not working!
+    public void KnockbackEffect(float knockbackEffect)
+    {
+        Debug.Log("KNOCKBACK!");
+        _rigidbody.AddForce(Vector3.back * knockbackEffect, ForceMode2D.Impulse);
+    }
+
+
+    //TODO: Move to Weapon script :) 
     private void ShootUp()
     {
 
@@ -97,6 +110,7 @@ public class MovementController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             animator.SetBool("isJumping", true);
+            playerAudioSource.PlayOneShot(jumpSFX);
             _rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
 
         }
@@ -104,6 +118,7 @@ public class MovementController : MonoBehaviour
         {   
             if(doubleJumpCooldown == true && doubleJumpEnabler == true)
             {
+                playerAudioSource.PlayOneShot(doubleJumpSFX);
                 _rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
                 doubleJumpCooldown = false;
             }
@@ -161,7 +176,7 @@ public class MovementController : MonoBehaviour
         animator.SetFloat("speed", Mathf.Abs(movement));
         animator.SetFloat("height", Mathf.Abs(height));
 
-        //TODO: After player jumps, if holding LEFT or RIGHT while on a platform they get stuck in the middle of the jumping animation! FIX IT!
+        //TODO: After player jumps, if holding LEFT or RIGHT while on a platform they get stuck in the middle of the jumping animation!
 
         Rotate(movement, height);
         

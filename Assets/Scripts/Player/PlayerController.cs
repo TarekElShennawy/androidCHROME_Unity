@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float maxHealth = 500f;
-    public float health;
+    public int maxHealth;
+    public int health;
 
-    public Healthbar healthBar;
+    public HealthPoints healthPoints;
     public SpriteRenderer spriteGFX;
+
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip hit;
+
 
     public GameObject deathEffect;
     private float damageTakenCooldown;
@@ -16,11 +20,12 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        maxHealth = 5;
+
         health = maxHealth;
-        healthBar.UpdateHealthBar();
     }
 
-    public void TakeDamage (float damage)
+    public void TakeDamage (int damage)
     {
         health -= damage;
 
@@ -28,7 +33,10 @@ public class PlayerController : MonoBehaviour
         spriteGFX.color = Color.red;
         StartCoroutine(whitecolor());
 
-        healthBar.UpdateHealthBar();
+        //Hit audio
+        audioSource.PlayOneShot(hit);
+
+        healthPoints.removeHealthPoints();
         Debug.Log(health);
 
         if (health <= 0)
@@ -58,12 +66,14 @@ public class PlayerController : MonoBehaviour
     {
         if(collider.gameObject.tag == "Enemy")
         {
-            TakeDamage(10);
+            TakeDamage(1);
             damageTakenCooldown = 1f;
         }
     }
 
     //DoT when enemy on top of player, WORKS BUT THERE MUST BE A BETTER WAY OF IMPLEMENTING THE DAMAGE TAKEN COOL DOWN?
+
+    /*
     private void OnTriggerStay2D(Collider2D collider)
     {
         
@@ -74,5 +84,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log("DoT");
         }
     }
+    */
     
 }
