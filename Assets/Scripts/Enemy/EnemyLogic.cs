@@ -6,13 +6,24 @@ public class EnemyLogic : MonoBehaviour
 {
     public int maxHealth = 100;
     public int health;
-    public GameObject deathEffect;
+    public GameObject deathEffect;  
     public SpriteRenderer spriteGFX;
+    public AudioSource enemyAudio;
+    public Rigidbody2D _rigidbody;
 
     LevelSystem PlayerLevel;
 
     [SerializeField]
     private GameObject HealthObj;
+
+    [SerializeField]
+    private Animator animator;
+
+    [SerializeField]
+    private AudioClip attackDeathAudio;
+
+    [SerializeField]
+    private AudioClip deathAudio;
 
     private void Start ()
     {
@@ -50,10 +61,19 @@ public class EnemyLogic : MonoBehaviour
             DropLoot(HealthObj);
         }
     }
-
     IEnumerator whitecolor() {
         yield return new WaitForSeconds(0.5f);
         spriteGFX.color = Color.white;
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "Player")
+        {
+            animator.SetBool("nearPlayer", true);
+            enemyAudio.PlayOneShot(attackDeathAudio);
+            Destroy(gameObject, .5f);
+        }
+        
     }
 
     void Die()
@@ -61,4 +81,6 @@ public class EnemyLogic : MonoBehaviour
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
+
+    
 }

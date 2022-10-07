@@ -175,6 +175,8 @@ MonoBehaviour:
   deathEffect: {fileID: 2527676595079056396, guid: 3cd9ba429450fcb4a9609a4221845fce,
     type: 3}
   spriteGFX: {fileID: 1601560849930417059}
+  knockbackForce: 100000
+  _rigidbody: {fileID: 1601560851524176089}
   HealthObj: {fileID: 1846396577405823669, guid: 6d7c02be5814bbd4790775c119a7b310,
     type: 3}
 --- !u!114 &1601560851524176092
@@ -280,7 +282,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &1601560851524176088
 CircleCollider2D:

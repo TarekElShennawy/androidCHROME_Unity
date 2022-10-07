@@ -3,29 +3,31 @@ using System.Collections;
 
 public class MovementController : MonoBehaviour
 {
+    //Start() Variables
+    private Rigidbody2D _rigidbody;
+    private BoxCollider2D coll;
+    public bool isCrouching;
+
     public ParticleSystem dust;
+
+
+    //Inspector Variables
     public float MovementSpeed = 5f;
     public float JumpForce = 1f;
     public Animator animator;
-    public bool isCrouching;
     public bool shootingUp;
     private bool aimRight;
     public bool doubleJumpEnabler;
     private bool doubleJumpCooldown;
-
     public int speedMultiplier;
-    private bool canDash = true;
-    private bool isDashing;
-    private float dashingPower = 24f;
-    private float dashingTime = 0.2f;
-    private float dashingCooldown = 1f;
 
-    //TODO: clear up audio into it's own script
+    //Audio Variables
     public AudioSource playerAudioSource;
+    public AudioSource playerFootsteps;
     public AudioClip jumpSFX;
     public AudioClip doubleJumpSFX;
-    private Rigidbody2D _rigidbody;
-    private BoxCollider2D coll;
+    
+    //Private variables
     [SerializeField] private LayerMask groundLayer;
 
     private void Start()
@@ -74,14 +76,6 @@ public class MovementController : MonoBehaviour
             animator.SetBool("IsCrouching", false);
         }
     }
-
-    //Work In Progress TODO: method running but not working!
-    public void KnockbackEffect(float knockbackEffect)
-    {
-        Debug.Log("KNOCKBACK!");
-        _rigidbody.AddForce(Vector3.back * knockbackEffect, ForceMode2D.Impulse);
-    }
-
 
     //TODO: Move to Weapon script :) 
     private void ShootUp()
@@ -188,6 +182,10 @@ public class MovementController : MonoBehaviour
 
     }
 
+    private void Footsteps()
+    {
+        playerFootsteps.Play();
+    }
     private void Update()
     {
      Movement();  

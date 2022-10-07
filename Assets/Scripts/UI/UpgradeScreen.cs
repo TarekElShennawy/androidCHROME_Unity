@@ -51,6 +51,7 @@ public class UpgradeScreen : MonoBehaviour
         U3Button.enabled = !U3Button.enabled;
     }
 
+    //Upgrade enablers
     public void enableDoubleJump()
     {
         MoveControl.doubleJumpEnabler = true;

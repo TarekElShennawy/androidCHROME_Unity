@@ -8,6 +8,10 @@ public class WaveSpawner : MonoBehaviour
 
     public WaveText waveUI;
 
+    public SetScreen victory;
+
+    public SetScreen loss;
+
     public int currWave;
     public int finalWave;
     private int spawnIndex;
@@ -30,15 +34,25 @@ public class WaveSpawner : MonoBehaviour
 
     void Update()
     {
-        if (GameObject.Find("Enemy(Clone)") == null && currWave < finalWave)
+        if (GameObject.Find("Enemy(Clone)") == null)
         {
-            currWave += 1;
+            if(currWave <= finalWave)
+            {
+                currWave += 1;
 
-            StartCoroutine(waveUI.waveUIPopUp());
+                StartCoroutine(waveUI.waveUIPopUp());
 
-            WaveGenerator();
+                WaveGenerator();
+            }
+            else
+            {
+                victory.ActivateScreen();
+            }
         }
-
+        else if (GameObject.Find("Player") == null)
+        {
+            loss.ActivateScreen();
+        }
     }
 
     //Randomised spawn points based on a random number generator

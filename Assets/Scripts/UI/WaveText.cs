@@ -28,7 +28,7 @@ public class WaveText : MonoBehaviour
         if (wave.currWave == wave.finalWave)
         {
             
-            waveText.text = "FINAL WAVE";
+            waveText.text = "FINAL";
         }
         else if(wave.currWave < wave.finalWave)
         {

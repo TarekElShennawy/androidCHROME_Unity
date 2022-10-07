@@ -7,6 +7,13 @@ public class EnemyGFX : MonoBehaviour
 {
     public AIPath aiPath;
 
+    public AudioSource enemyAudio;
+
+    public void flapWingSFX()
+    {
+        enemyAudio.Play();
+    }
+
     // Update is called once per frame
     void Update()
     {

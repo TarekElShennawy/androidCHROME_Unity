@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
         audioSource.PlayOneShot(hit);
 
         healthPoints.removeHealthPoints();
-        Debug.Log(health);
 
         if (health <= 0)
         {
