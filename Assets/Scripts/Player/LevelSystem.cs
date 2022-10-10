@@ -6,9 +6,9 @@ using TMPro;
 public class LevelSystem : MonoBehaviour
 {
     private int level;
-    public int experience;
+    public float experience;
 
-    public int experienceRequired;
+    public float experienceRequired;
 
     public UpgradeScreen Screen;
 
@@ -18,7 +18,6 @@ public class LevelSystem : MonoBehaviour
     void Start()
     {
         level = 1;
-        experienceRequired = 10;
 
         levelUI.text = "Lv. " + level.ToString();
 
@@ -33,7 +32,7 @@ public class LevelSystem : MonoBehaviour
         {
             //Level Up!
             level += 1;
-            experience = 0;
+            experience = 0f;
             
             Screen.ChooseUpgrade();
             

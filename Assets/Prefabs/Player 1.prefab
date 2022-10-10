@@ -141,7 +141,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 2
   m_Sprite: {fileID: -428404774, guid: 0e7ecf9c9d778f84aaaa34df3f14cba2, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
-  health: 0
+  health: -16
   healthPoints: {fileID: 0}
   spriteGFX: {fileID: 520523718556566150}
   audioSource: {fileID: 0}

@@ -1,0 +1,13 @@
+Deafult frame duration 80 miliseconds.
+
+
+Damage frame duration(miliseconds):
+1)120
+2)120
+3)120
+4)120
+5)150
+6)120
+7)120
+8)120
+9)150

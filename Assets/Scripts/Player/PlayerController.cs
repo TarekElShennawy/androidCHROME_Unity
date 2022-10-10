@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
 
 
     public GameObject deathEffect;
-    private float damageTakenCooldown;
 
     // Start is called before the first frame update
     void Start()
@@ -54,24 +53,16 @@ public class PlayerController : MonoBehaviour
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
-
-    void Update()
-    {
-        damageTakenCooldown -= Time.deltaTime;
-        //Debug.Log(damageTakenCooldown);
-    }
-
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.tag == "Enemy")
         {
             TakeDamage(1);
-            damageTakenCooldown = 1f;
         }
     }
 
-    //DoT when enemy on top of player, WORKS BUT THERE MUST BE A BETTER WAY OF IMPLEMENTING THE DAMAGE TAKEN COOL DOWN?
-
+    //DoT when enemy on top of player
+    
     /*
     private void OnTriggerStay2D(Collider2D collider)
     {

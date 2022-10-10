@@ -170,13 +170,11 @@ public class MovementController : MonoBehaviour
         animator.SetFloat("speed", Mathf.Abs(movement));
         animator.SetFloat("height", Mathf.Abs(height));
 
-        //TODO: After player jumps, if holding LEFT or RIGHT while on a platform they get stuck in the middle of the jumping animation!
-
         Rotate(movement, height);
         
         Jump();
 
-        Crouch();
+        //Crouch();
 
         ShootUp();
 

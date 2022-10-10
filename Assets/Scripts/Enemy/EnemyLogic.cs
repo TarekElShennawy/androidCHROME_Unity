@@ -9,7 +9,6 @@ public class EnemyLogic : MonoBehaviour
     public GameObject deathEffect;  
     public SpriteRenderer spriteGFX;
     public AudioSource enemyAudio;
-    public Rigidbody2D _rigidbody;
 
     LevelSystem PlayerLevel;
 
@@ -22,8 +21,7 @@ public class EnemyLogic : MonoBehaviour
     [SerializeField]
     private AudioClip attackDeathAudio;
 
-    [SerializeField]
-    private AudioClip deathAudio;
+    PlayerController player;
 
     private void Start ()
     {
@@ -65,6 +63,10 @@ public class EnemyLogic : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         spriteGFX.color = Color.white;
     }
+
+    //TODO: ENEMY LOGIC DETECTION IS CURRENTLY BASED ON WHETHER AN ENEMY HAS A TRIGGER COLLIDER OR NOT, READ IF THERE IS A BETTER WAY OF DOING IT. (spoiler alert: there must be)
+
+    //Logic for bat enemies as their colliders are triggers
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.tag == "Player")
@@ -72,8 +74,7 @@ public class EnemyLogic : MonoBehaviour
             animator.SetBool("nearPlayer", true);
             enemyAudio.PlayOneShot(attackDeathAudio);
             Destroy(gameObject, .5f);
-        }
-        
+        } 
     }
 
     void Die()

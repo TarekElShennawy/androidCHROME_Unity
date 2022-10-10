@@ -7,7 +7,16 @@ public class Levelbar : MonoBehaviour
 {
     public Image levelBarImage;
     public LevelSystem levelSystem;
+    
+    private float levelPercentage;
+
   public void UpdateLevelBar() {
-    levelBarImage.fillAmount = Mathf.Clamp(levelSystem.experience / levelSystem.experienceRequired, 0, .5f);   
+    levelPercentage = (levelSystem.experience)/(levelSystem.experienceRequired);
+    levelBarImage.fillAmount = levelPercentage;
+  }
+
+  void Update()
+  {
+    UpdateLevelBar();
   }
 }
