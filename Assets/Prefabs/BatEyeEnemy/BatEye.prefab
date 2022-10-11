@@ -76,7 +76,12 @@ PrefabInstance:
     - target: {fileID: 6702511132690179007, guid: 6a1c298ce830d5949bc979e65a44b5a0,
         type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: BatEye
+      objectReference: {fileID: 0}
+    - target: {fileID: 6702511132690179007, guid: 6a1c298ce830d5949bc979e65a44b5a0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6702511134250522818, guid: 6a1c298ce830d5949bc979e65a44b5a0,
         type: 3}
@@ -93,6 +98,11 @@ PrefabInstance:
       propertyPath: enemyAudio
       value: 
       objectReference: {fileID: 5195068208974054165}
+    - target: {fileID: 6702511134250522822, guid: 6a1c298ce830d5949bc979e65a44b5a0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6702511134250522823, guid: 6a1c298ce830d5949bc979e65a44b5a0,
         type: 3}
       propertyPath: m_Size.x

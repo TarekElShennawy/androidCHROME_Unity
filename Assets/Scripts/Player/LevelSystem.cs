@@ -35,8 +35,9 @@ public class LevelSystem : MonoBehaviour
             experience = 0f;
             
             Screen.ChooseUpgrade();
+            //Time.timeScale = 0;
             
-            levelUI.text = "Level: " + level.ToString();
+            levelUI.text = "Lv. " + level.ToString();
             
         }
     }

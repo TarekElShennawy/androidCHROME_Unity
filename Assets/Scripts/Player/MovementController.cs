@@ -184,7 +184,7 @@ public class MovementController : MonoBehaviour
     {
         playerFootsteps.Play();
     }
-    private void Update()
+    private void LateUpdate()
     {
      Movement();  
     }

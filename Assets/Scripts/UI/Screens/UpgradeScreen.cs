@@ -12,6 +12,8 @@ public class UpgradeScreen : MonoBehaviour
     [SerializeField] private Button U2Button;
     [SerializeField] private Button U3Button;
 
+    public Animator transition;
+
     public MovementController MoveControl;
 
     public Weapon WeaponControl;
@@ -32,6 +34,8 @@ public class UpgradeScreen : MonoBehaviour
     {
         Time.timeScale = 0;
 
+
+        //TODO: Closing wipe animation wont work because of the SetActive line below, not a priority currently as opening animation works.
         Screen.SetActive(true);
         upgradeTitle.enabled = true;
 
@@ -49,6 +53,8 @@ public class UpgradeScreen : MonoBehaviour
         U1Button.enabled = !U1Button.enabled;
         U2Button.enabled = !U2Button.enabled;
         U3Button.enabled = !U3Button.enabled;
+
+        transition.SetTrigger("Continue");
     }
 
     //Upgrade enablers

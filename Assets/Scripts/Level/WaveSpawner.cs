@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
-
     public WaveText waveUI;
 
     public SetScreen victory;
@@ -90,13 +88,11 @@ public class WaveSpawner : MonoBehaviour
                     switch(enemySpawn.name) 
                     {
                         case "Orc":
-                        Instantiate(enemySpawn, spawnpoints[landSpawnIndex].position, enemyPrefab.transform.rotation);
-                        Debug.Log(landSpawnIndex);
+                        Instantiate(enemySpawn, spawnpoints[landSpawnIndex].position, enemySpawn.transform.rotation);
                         break;
 
                         case "BatEye":
-                        Instantiate(enemySpawn, spawnpoints[airSpawnIndex].position, enemyPrefab.transform.rotation);
-                        Debug.Log(airSpawnIndex);
+                        Instantiate(enemySpawn, spawnpoints[airSpawnIndex].position, enemySpawn.transform.rotation);
                         break;
                     }
 
