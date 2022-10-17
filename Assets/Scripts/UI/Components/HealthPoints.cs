@@ -6,7 +6,7 @@ public class HealthPoints : MonoBehaviour
 {
 
     [SerializeField]
-    private GameObject[] healthPoints = new GameObject[4];
+    private GameObject[] healthPoints = new GameObject[5];
 
     public PlayerController player;
 
@@ -18,7 +18,10 @@ public class HealthPoints : MonoBehaviour
     public void addHealthPoints()
     {
         healthPoints[player.health].SetActive(true);
+    }
 
-        //Debug.Log(player.health + 1);
+    public void increaseHP()
+    {
+        healthPoints[5].SetActive(true);
     }
 }

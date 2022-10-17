@@ -5,22 +5,24 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public Transform firePoint;
-    public Transform firePoint_crouch;
-    public Transform firePoint_up;
     public GameObject bulletPrefab;
     public Animator animator;
     public AudioSource audioSource;
     public AudioClip shootingAudio;
-    public MovementController controller;
+    public AudioClip reloadingAudio;
     public GameObject powerUp;
-
     public bool powerUpEnabler;
-
     public float animationTime = 0.5f;
     private float cooldownValue;
     private float knockbackValue;
-
     public ScreenShake shaker;
+
+    public ReloadUI reloadUI;
+
+    public int magazineSize, currentBullets;
+    private float reloadTime;
+
+    private bool isReloading;
 
     private void Start()
     {
@@ -29,31 +31,17 @@ public class Weapon : MonoBehaviour
         cooldownValue = 0f;
 
         knockbackValue = 2f;
-    }
 
-    private IEnumerator CrouchShot()
-    {
+        magazineSize = 5;
 
-        audioSource.PlayOneShot(shootingAudio);
-        Instantiate(bulletPrefab, firePoint_crouch.position, firePoint_crouch.rotation);
+        currentBullets = magazineSize;
 
-        yield return new WaitForSeconds(animationTime);
-    }
-
-    private IEnumerator UpShot()
-    {
-
-        audioSource.PlayOneShot(shootingAudio);
-        Instantiate(bulletPrefab, firePoint_up.position, firePoint_up.rotation);
-
-        yield return new WaitForSeconds(animationTime);
+        reloadTime = 1f;
     }
 
     private IEnumerator Shoot()
     {
-        //animator.SetBool("isShooting", true);
         audioSource.PlayOneShot(shootingAudio);
-        //controller.KnockbackEffect(knockbackValue);
 
         if(powerUpEnabler)
         {
@@ -65,7 +53,6 @@ public class Weapon : MonoBehaviour
         }
 
         yield return new WaitForSeconds(animationTime);
-        //animator.SetBool("isShooting", false);
     }
 
     private bool WeaponCooldown(float cooldownValue)
@@ -79,26 +66,41 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    IEnumerator Reload()
+    {
+        isReloading = true;
+
+        yield return new WaitForSeconds(reloadTime);
+
+        currentBullets = magazineSize;
+
+        audioSource.PlayOneShot(reloadingAudio);
+
+        reloadUI.addAmmo();
+
+        isReloading = false;
+    }
+
     void Update()
     {
         cooldownValue -= Time.deltaTime;
 
-        if(controller.isCrouching == true && Input.GetButtonDown("Fire1") && WeaponCooldown(cooldownValue)  )
+        if(isReloading)
+            return;
+
+        if(currentBullets <= 0 || Input.GetKeyDown(KeyCode.R))
         {
-            StartCoroutine(CrouchShot());
-            cooldownValue = .1f;
+            StartCoroutine(Reload());
+            return;
         }
-        else if(controller.shootingUp == true && Input.GetButtonDown("Fire1") && WeaponCooldown(cooldownValue))
-        {
-            StartCoroutine(UpShot());
-            cooldownValue = .1f;
-        }
-        else if(Input.GetButtonDown("Fire1") && WeaponCooldown(cooldownValue))
+
+        if(Input.GetButtonDown("Fire1") && WeaponCooldown(cooldownValue) && currentBullets > 0)
         {
             StartCoroutine(Shoot());
             StartCoroutine(shaker.Shake()); 
             cooldownValue = .1f;
+            currentBullets--;
+            reloadUI.removeAmmo();
         }
     }
 }

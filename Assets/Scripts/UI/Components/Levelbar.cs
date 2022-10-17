@@ -7,7 +7,6 @@ public class Levelbar : MonoBehaviour
 {
     public Image levelBarImage;
     public LevelSystem levelSystem;
-    
     private float levelPercentage;
 
   public void UpdateLevelBar() {

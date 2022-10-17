@@ -16,7 +16,5 @@ public class SetScreen : MonoBehaviour
     {
 
         Screen.SetActive(true);
-
-        Time.timeScale = 0;
     }
 }

@@ -6,7 +6,7 @@ public class enemyAI : MonoBehaviour
 {
     Transform player;
     public PlayerController playerController;
-    public float speed = 200f;
+    public float speed;
     private float distance;
 
     public Animator animator;
@@ -16,6 +16,7 @@ public class enemyAI : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player").transform;
+        speed = 2f;
     }
     
     // Update is called once per frame
@@ -25,9 +26,8 @@ public class enemyAI : MonoBehaviour
         Vector2 direction = player.transform.position - transform.position;
         direction.Normalize();
 
-        //Getting the angle between y and x directions using Tan
-        //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
+        //I understand I could've done triggers now, I wrote this code before and implemented triggers in the boss scripts. (TODO: substitute enemy animator bools to triggers)
         if(distance >= attackRange)
         {
             animator.SetBool("nearPlayer", false);
@@ -46,7 +46,5 @@ public class enemyAI : MonoBehaviour
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
         }
-
-        //Debug.Log(distance);
     }
 }

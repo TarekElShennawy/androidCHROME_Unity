@@ -1,13 +1,15 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WaveSpawner : MonoBehaviour
 {
     public WaveText waveUI;
 
-    public SetScreen victory;
+    public bossUI bossHealthUI;
 
+    public SetScreen victory;
     public SetScreen loss;
 
     public int currWave;
@@ -15,7 +17,7 @@ public class WaveSpawner : MonoBehaviour
     private int landSpawnIndex;
     private int airSpawnIndex;
     private Transform[] spawnpoints;
-    private Vector3 spawnPos;
+    [SerializeField] private Transform bossSpawnPoint;
     private int count;
     private int enemyIndex;
 
@@ -23,11 +25,19 @@ public class WaveSpawner : MonoBehaviour
 
     private float newTime;
 
+    public bool isBossFight;
+
+    public float waveTimeIterator;
+
     [SerializeField]
     private int difficultyMultiplier;
 
     [SerializeField]
     private GameObject[] enemyList;
+
+    [SerializeField] private GameObject boss;
+
+    [SerializeField] private TextMeshProUGUI timerText;
 
     // Currently only spawns one enemy prefab type, develop so that it can take different enemy prefabs
     void Start()
@@ -35,6 +45,8 @@ public class WaveSpawner : MonoBehaviour
         count = transform.childCount;
         spawnpoints = new Transform[count];
         newTime = waveTimer;
+
+        isBossFight = false;
         
         for(int i = 0; i < count; i++){
             spawnpoints[i] = transform.GetChild(i);
@@ -47,28 +59,57 @@ public class WaveSpawner : MonoBehaviour
     {
         waveTimer -= Time.deltaTime;
 
+        timerText.text = waveTimer.ToString("0");
+        
         if (waveTimer <= 0)
         {
-            newTime += 2f;
+            newTime += waveTimeIterator;
         
             if(currWave <= finalWave)
             {
-                waveTimer = newTime;
-                currWave += 1;
-
-                StartCoroutine(waveUI.waveUIPopUp());
-
-                WaveGenerator();
+                Iterate();
             }
             else
             {
-                victory.ActivateScreen();
+                //Else, Boss fight
+                if(!isBossFight)
+                {
+                    isBossFight = true;
+                    GameObject.Destroy(timerText);
+                    bossHealthUI.enableBossUI();
+                    SpawnBoss();
+                }
+
+                if(isBossFight && GameObject.FindWithTag("Boss") == null)
+                {
+                    victory.ActivateScreen();
+                }
+
+                if(isBossFight && GameObject.FindWithTag("Player") == null)
+                {
+                    loss.ActivateScreen();
+                }
             }
         }
         else if (GameObject.Find("Player") == null)
         {
             loss.ActivateScreen();
         }
+    }
+
+    private void SpawnBoss()
+    {
+        Instantiate(boss, bossSpawnPoint.position, bossSpawnPoint.transform.rotation);
+    }
+
+    private void Iterate()
+    {
+                waveTimer = newTime;
+                currWave += 1;
+
+                StartCoroutine(waveUI.waveUIPopUp());
+
+                WaveGenerator();
     }
 
     //Randomised spawn points based on a random number generator, made more modular using a list of Enemy prefabs. Spawns are semi-hardcoded (landSpawnIndex and airSpawnIndex) and has room for improvement.

@@ -18,9 +18,16 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
         EnemyLogic enemy = hitInfo.GetComponent<EnemyLogic>();
+        BossLogic boss = hitInfo.GetComponent<BossLogic>();
+        
         if (enemy != null)
         {
             enemy.TakeDamage(damage);
+        }
+
+        if (boss != null)
+        {
+            boss.TakeDamage(damage);
         }
 
         Instantiate(impactEffect, transform.position, transform.rotation);
