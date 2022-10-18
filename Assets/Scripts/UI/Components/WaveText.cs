@@ -20,11 +20,7 @@ public class WaveText : MonoBehaviour
     }
 
     public void updateWave()
-    {  
-        //Game Over text is prioritised, while player exists in scene the wave text shows wave numbers and final wave!
-
-        //TODO: SHOWING FINAL WAVE AS "YOU WIN"
-        
+    {   
         if (wave.currWave == wave.finalWave)
         {
             
@@ -39,7 +35,7 @@ public class WaveText : MonoBehaviour
 
     public IEnumerator waveUIPopUp()
     {
-        float waitTime = 1;
+        float waitTime = 0.5f;
 
         updateWave();
 

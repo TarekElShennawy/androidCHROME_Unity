@@ -6,7 +6,6 @@ public class BossLogic : MonoBehaviour
 {
     public float maxHealth = 100;
     public float health;
-    public GameObject deathEffect;  
     public SpriteRenderer spriteGFX;
     LevelSystem PlayerLevel;
 
@@ -23,6 +22,12 @@ public class BossLogic : MonoBehaviour
         health = maxHealth;
     }
 
+    private void Sneer()
+    {
+            animator.SetBool("isSneer", true);
+            enemyAI.speed = 3f;
+    }
+
     //Thank you again Brackeys for explaining how to implement damage logic!
     public void TakeDamage(int damage)
     {
@@ -31,22 +36,14 @@ public class BossLogic : MonoBehaviour
 
         if(health <= (0.7 * maxHealth))
         {
-            animator.SetBool("isSneer", true);
-            enemyAI.speed = 3f;
+            Sneer();
         }
 
         if (health <= 0)
         {
-            Die();
-            PlayerLevel.AddExperience(5);
+            animator.SetBool("isDead", true);
         }
+
     }
 
-    void Die()
-    {
-        Instantiate(deathEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
-    }
-
-    
 }

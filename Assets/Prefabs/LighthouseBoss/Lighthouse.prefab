@@ -141,7 +141,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8864532854244693562}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.4731321, y: -2.9059668, z: 0.06276748}
+  m_LocalPosition: {x: -3.2280602, y: -2.91, z: 0.06276748}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -223,7 +223,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c84bf3976cde81f45861fa86b1be6633, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.162
   m_Pitch: 0.15
@@ -336,8 +336,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 400
   health: 0
-  deathEffect: {fileID: 2527676595079056396, guid: 3cd9ba429450fcb4a9609a4221845fce,
-    type: 3}
   spriteGFX: {fileID: 8864532855686921441}
   animator: {fileID: 8864532855686921446}
   enemyAI: {fileID: 8864532854244693564}
@@ -352,8 +350,9 @@ GameObject:
   - component: {fileID: 8864532855686921440}
   - component: {fileID: 8864532855686921441}
   - component: {fileID: 8864532855686921446}
-  - component: {fileID: 251670746124614411}
   - component: {fileID: 4485818029952053321}
+  - component: {fileID: 7654652875365205022}
+  - component: {fileID: 4889269819206093831}
   m_Layer: 7
   m_Name: LighthouseGFX
   m_TagString: Untagged
@@ -448,20 +447,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &251670746124614411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8864532855686921443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92c2361a437e44c4fad9c3a0268934dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sfxSource: {fileID: 251670746327011078}
-  footstepSFX: {fileID: 8300000, guid: c84bf3976cde81f45861fa86b1be6633, type: 3}
 --- !u!114 &4485818029952053321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,3 +459,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b6c979d8e768a248bc0000e6db7eb05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7654652875365205022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8864532855686921443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc9b03637950cc546ae24bcebd34c98b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lighthouseSfxSource: {fileID: 251670746327011078}
+  whirringSFX: {fileID: 8300000, guid: 066d4f15549a6480eaea224b69a1c85f, type: 3}
+  shotSFX: {fileID: 8300000, guid: fdc1f987c9a864c1db266f2f63908683, type: 3}
+--- !u!114 &4889269819206093831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8864532855686921443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d25c83b8ebd224590b6ceaf6c93387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathEffect: {fileID: 2527676595079056396, guid: 3cd9ba429450fcb4a9609a4221845fce,
+    type: 3}

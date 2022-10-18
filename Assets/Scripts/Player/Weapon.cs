@@ -88,10 +88,24 @@ public class Weapon : MonoBehaviour
         if(isReloading)
             return;
 
-        if(currentBullets <= 0 || Input.GetKeyDown(KeyCode.R))
+        if(currentBullets <= 0)
         {
             StartCoroutine(Reload());
             return;
+        }
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            if(currentBullets < magazineSize)
+            {
+                StartCoroutine(Reload());
+                return;
+            }
+            else if (currentBullets == magazineSize)
+            {
+                return;
+            }
+            
         }
 
         if(Input.GetButtonDown("Fire1") && WeaponCooldown(cooldownValue) && currentBullets > 0)

@@ -69,15 +69,14 @@ public class EnemyLogic : MonoBehaviour
     //Logic for bat enemies as their colliders are triggers
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Player")
+        if(other.gameObject.tag == "Player")
         {
             animator.SetBool("nearPlayer", true);
-            enemyAudio.PlayOneShot(attackDeathAudio);
-            Destroy(gameObject, .5f);
-        } 
+        }
+        
     }
 
-    void Die()
+    public void Die()
     {
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);

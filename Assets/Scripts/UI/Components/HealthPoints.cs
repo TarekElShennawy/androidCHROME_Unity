@@ -22,6 +22,10 @@ public class HealthPoints : MonoBehaviour
 
     public void increaseHP()
     {
-        healthPoints[5].SetActive(true);
+        foreach(GameObject healthpoint in healthPoints)
+        {
+            healthpoint.SetActive(true);
+        }
+        
     }
 }

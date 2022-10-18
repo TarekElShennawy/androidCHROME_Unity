@@ -65,7 +65,7 @@ public class WaveSpawner : MonoBehaviour
         {
             newTime += waveTimeIterator;
         
-            if(currWave <= finalWave)
+            if(currWave < finalWave)
             {
                 Iterate();
             }
@@ -79,23 +79,19 @@ public class WaveSpawner : MonoBehaviour
                     bossHealthUI.enableBossUI();
                     SpawnBoss();
                 }
-
-                if(isBossFight && GameObject.FindWithTag("Boss") == null)
-                {
-                    victory.ActivateScreen();
-                }
-
-                if(isBossFight && GameObject.FindWithTag("Player") == null)
-                {
-                    loss.ActivateScreen();
-                }
             }
         }
-        else if (GameObject.Find("Player") == null)
-        {
-            loss.ActivateScreen();
-        }
-    }
+
+        if(isBossFight && GameObject.FindWithTag("Boss") == null)
+            {
+                victory.ActivateScreen();
+            }
+
+        if(isBossFight && GameObject.FindWithTag("Player") == null)
+            {
+                loss.ActivateScreen();
+            }
+}
 
     private void SpawnBoss()
     {

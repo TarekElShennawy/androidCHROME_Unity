@@ -10,7 +10,6 @@ public class MovementController : MonoBehaviour
 
     public ParticleSystem dust;
 
-
     //Inspector Variables
     public float MovementSpeed = 5f;
     public float JumpForce = 1f;
@@ -57,48 +56,6 @@ public class MovementController : MonoBehaviour
     return false;
     }
 
-    private void Crouch()
-    {
-        //Crouch Logic
-        if(Input.GetButtonDown("Crouch")){ 
-            isCrouching = true; 
-        }
-        
-        if(Input.GetButtonUp("Crouch")){
-            isCrouching = false;
-        }
-
-        //Animation Logic
-        if (isCrouching && IsGrounded()){
-            animator.SetBool("IsCrouching", true);
-        }
-        else{
-            animator.SetBool("IsCrouching", false);
-        }
-    }
-
-    //TODO: Move to Weapon script :) 
-    private void ShootUp()
-    {
-
-        //Shoot Up Logic
-        if(Input.GetButtonDown("ShootUp")){ 
-            shootingUp = true; 
-        }
-        
-        if(Input.GetButtonUp("ShootUp")){
-            shootingUp = false;
-        }
-
-        //Animation Logic
-        if (shootingUp){
-            animator.SetBool("isShootingUp", true);
-        }
-        else{
-            animator.SetBool("isShootingUp", false);
-        }
-    }
-
     private void Jump()
     {
         if (Input.GetButtonDown("Jump") && IsGrounded())
@@ -124,6 +81,7 @@ public class MovementController : MonoBehaviour
 
         }
     }
+    
     //Thank you Brackeys for the Flip logic :)
     private void Flip()
 	{
@@ -173,10 +131,6 @@ public class MovementController : MonoBehaviour
         Rotate(movement, height);
         
         Jump();
-
-        //Crouch();
-
-        ShootUp();
 
     }
 

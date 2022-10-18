@@ -53,27 +53,5 @@ public class PlayerController : MonoBehaviour
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if(collider.gameObject.tag == "Enemy")
-        {
-            TakeDamage(1);
-        }
-    }
-
-    //DoT when enemy on top of player
-    
-    /*
-    private void OnTriggerStay2D(Collider2D collider)
-    {
-        
-        if(collider.gameObject.tag == "Enemy" && damageTakenCooldown <= 0)
-        {
-            TakeDamage(5);
-            damageTakenCooldown = 1f;
-            Debug.Log("DoT");
-        }
-    }
-    */
     
 }
