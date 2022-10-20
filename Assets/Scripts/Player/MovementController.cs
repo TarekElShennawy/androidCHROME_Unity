@@ -6,12 +6,11 @@ public class MovementController : MonoBehaviour
     //Start() Variables
     private Rigidbody2D _rigidbody;
     private BoxCollider2D coll;
-    public bool isCrouching;
 
     public ParticleSystem dust;
 
     //Inspector Variables
-    public float MovementSpeed = 5f;
+    public float MovementSpeed;
     public float JumpForce = 1f;
     public Animator animator;
     public bool shootingUp;
@@ -25,6 +24,10 @@ public class MovementController : MonoBehaviour
     public AudioSource playerFootsteps;
     public AudioClip jumpSFX;
     public AudioClip doubleJumpSFX;
+
+    //Test Var
+
+    public Vector2 move;
     
     //Private variables
     [SerializeField] private LayerMask groundLayer;
@@ -33,7 +36,6 @@ public class MovementController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
-        isCrouching = false;
 
         doubleJumpEnabler = false;
 
@@ -56,32 +58,29 @@ public class MovementController : MonoBehaviour
     return false;
     }
 
-    private void Jump()
-    {
-        if (Input.GetButtonDown("Jump") && IsGrounded())
-        {
-            animator.SetBool("isJumping", true);
-            playerAudioSource.PlayOneShot(jumpSFX);
-            _rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+    
 
-        }
-        else if (Input.GetButtonDown("Jump") && _rigidbody.velocity.y > 0) //Double Jump Upgrade!!!
-        {   
-            if(doubleJumpCooldown == true && doubleJumpEnabler == true)
+    private void DoubleJump()
+    {
+        if(doubleJumpCooldown == true && doubleJumpEnabler == true)
             {
                 playerAudioSource.PlayOneShot(doubleJumpSFX);
-                _rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+                _rigidbody.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
                 doubleJumpCooldown = false;
             }
-        }
-        else if (IsGrounded())
-        {
-            animator.SetBool("isJumping", false);
-            doubleJumpCooldown = true;
-
-        }
     }
-    
+
+    private void Jump()
+    {
+            _rigidbody.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
+            playerAudioSource.PlayOneShot(jumpSFX);
+    }
+
+    private void Footsteps()
+    {
+        playerFootsteps.Play();
+    }
+
     //Thank you Brackeys for the Flip logic :)
     private void Flip()
 	{
@@ -96,8 +95,7 @@ public class MovementController : MonoBehaviour
 
 		transform.Rotate(0f, 180f, 0f);
 	}
-
-    private void Rotate(float movement, float height)
+    private void Rotate(float movement)
     {
         //Rotation logic
         if (movement > 0 && aimRight)
@@ -112,34 +110,36 @@ public class MovementController : MonoBehaviour
         }
     }
 
-    private void Movement()
+    private void Update()
     {
-
-        //Thank you Distorted Pixel Studios on Youtube for this!
-        var movement = Input.GetAxis("Horizontal") * speedMultiplier;
         var height = _rigidbody.velocity.y;
-
-        if(!isCrouching)
-        {
-            transform.position = transform.position + new Vector3(movement,0,0) * Time.deltaTime * MovementSpeed;
-        }
-        
-
-        animator.SetFloat("speed", Mathf.Abs(movement));
         animator.SetFloat("height", Mathf.Abs(height));
 
-        Rotate(movement, height);
+        //Jump logic re-worked, if statements are now in update to detect player input as soon as possible
+
+        if (Input.GetButtonDown("Jump") && IsGrounded())
+        {
+            Jump();
+        }   
+        else if (Input.GetButtonDown("Jump") && height > 0)
+        {
+            DoubleJump();
+        }
+
+        //allow double jump when player falls on ground
+
+        if (IsGrounded() && doubleJumpEnabler == true)
+        {
+            doubleJumpCooldown = true;
+        }
+
         
-        Jump();
-
+        move.x = Input.GetAxis("Horizontal") * MovementSpeed;
     }
-
-    private void Footsteps()
+    private void FixedUpdate()
     {
-        playerFootsteps.Play();
-    }
-    private void LateUpdate()
-    {
-     Movement();  
+        _rigidbody.velocity = new Vector2(move.x * MovementSpeed * Time.deltaTime, _rigidbody.velocity.y);
+        animator.SetFloat("speed", Mathf.Abs(move.x));
+        Rotate(move.x);
     }
 }

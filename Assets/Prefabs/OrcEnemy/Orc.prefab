@@ -169,7 +169,7 @@ Transform:
   - {fileID: 1239338317350678514}
   - {fileID: 7475369197710331904}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1239338318886339884
 BoxCollider2D:
@@ -218,7 +218,7 @@ MonoBehaviour:
   HealthObj: {fileID: 1846396577405823669, guid: 6d7c02be5814bbd4790775c119a7b310,
     type: 3}
   animator: {fileID: 1239338317350678516}
-  attackDeathAudio: {fileID: 0}
+  scoreVal: 10
 --- !u!50 &1239338318886339882
 Rigidbody2D:
   serializedVersion: 4
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
-  speed: 1
+  speed: 2
   animator: {fileID: 1239338317350678516}
   attackRange: 0.6
 --- !u!82 &7586378707697474580

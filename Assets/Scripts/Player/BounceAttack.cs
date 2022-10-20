@@ -10,6 +10,8 @@ public class BounceAttack : MonoBehaviour
 
     public AudioSource sfxSource;
 
+    private int bounceScore = 2;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("EnemyHead"))
@@ -19,6 +21,10 @@ public class BounceAttack : MonoBehaviour
             sfxSource.PlayOneShot(bounceSFX);
 
             var enemy = other.gameObject.transform.parent.GetComponent<EnemyLogic>();
+
+            var logic = FindObjectOfType<scoreLogic>();
+
+            logic.AddScore(bounceScore);
             enemy.Die();
         }
     }

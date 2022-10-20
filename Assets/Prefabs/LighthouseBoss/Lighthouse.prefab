@@ -122,10 +122,10 @@ GameObject:
   - component: {fileID: 8864532854244693563}
   - component: {fileID: 8864532854244693566}
   - component: {fileID: 8864532854244693560}
-  - component: {fileID: 8864532854244693564}
   - component: {fileID: 251670746327011078}
   - component: {fileID: 3416767630813192164}
   - component: {fileID: 9168900560390746754}
+  - component: {fileID: 1569806690462800983}
   m_Layer: 7
   m_Name: Lighthouse
   m_TagString: Boss
@@ -148,7 +148,7 @@ Transform:
   - {fileID: 8864532855686921440}
   - {fileID: 42724600930664299}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &8864532854244693566
 BoxCollider2D:
@@ -196,23 +196,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
---- !u!114 &8864532854244693564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8864532854244693562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6abc1a4b3f12f7d4da7e118408046513, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
-  speed: 2
-  animator: {fileID: 8864532855686921446}
-  attackRange: 0.6
+  m_Constraints: 6
 --- !u!82 &251670746327011078
 AudioSource:
   m_ObjectHideFlags: 0
@@ -338,7 +322,26 @@ MonoBehaviour:
   health: 0
   spriteGFX: {fileID: 8864532855686921441}
   animator: {fileID: 8864532855686921446}
-  enemyAI: {fileID: 8864532854244693564}
+  enemyAI: {fileID: 0}
+  scoreVal: 100
+  isSneer: 0
+--- !u!114 &1569806690462800983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8864532854244693562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f887d122ec88574ea824da949b1bec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
+  speed: 2
+  animator: {fileID: 8864532855686921446}
+  attackRange: 0.5
+  boss: {fileID: 9168900560390746754}
 --- !u!1 &8864532855686921443
 GameObject:
   m_ObjectHideFlags: 0

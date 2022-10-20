@@ -21,6 +21,8 @@ public class WaveSpawner : MonoBehaviour
     private int count;
     private int enemyIndex;
 
+    public bool playerWins;
+
     public float waveTimer;
 
     private float newTime;
@@ -39,6 +41,8 @@ public class WaveSpawner : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI timerText;
 
+    GameObject blocker;
+
     // Currently only spawns one enemy prefab type, develop so that it can take different enemy prefabs
     void Start()
     {
@@ -46,6 +50,10 @@ public class WaveSpawner : MonoBehaviour
         spawnpoints = new Transform[count];
         newTime = waveTimer;
 
+        blocker = GameObject.Find("Blocker");
+        blocker.SetActive(false);
+
+        playerWins = false;
         isBossFight = false;
         
         for(int i = 0; i < count; i++){
@@ -82,12 +90,12 @@ public class WaveSpawner : MonoBehaviour
             }
         }
 
-        if(isBossFight && GameObject.FindWithTag("Boss") == null)
+        if(playerWins)
             {
                 victory.ActivateScreen();
             }
 
-        if(isBossFight && GameObject.FindWithTag("Player") == null)
+        if(GameObject.FindWithTag("Player") == null)
             {
                 loss.ActivateScreen();
             }
@@ -96,6 +104,7 @@ public class WaveSpawner : MonoBehaviour
     private void SpawnBoss()
     {
         Instantiate(boss, bossSpawnPoint.position, bossSpawnPoint.transform.rotation);
+        blocker.SetActive(true);
     }
 
     private void Iterate()

@@ -20,7 +20,6 @@ public class enemyAI : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player").transform;
-        speed = 2f;
     }
 
     void Movement()
@@ -40,7 +39,9 @@ public class enemyAI : MonoBehaviour
             if(distance >= attackRange)
             {
                 animator.SetBool("nearPlayer", false);
+                
                 transform.position = Vector2.MoveTowards(this.transform.position, newXPos, speed * Time.deltaTime);
+                
             }
             else
             {

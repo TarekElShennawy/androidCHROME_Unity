@@ -14,17 +14,33 @@ public class BossLogic : MonoBehaviour
 
     public enemyAI enemyAI;
 
+    WaveSpawner spawner;
+
+    [SerializeField]
+    private int scoreVal;
+
+    scoreLogic scoreLogic;
+
+    public bool isSneer;
+
     private void Start ()
     {
         spriteGFX = GetComponentInChildren<SpriteRenderer>();
         PlayerLevel = FindObjectOfType<LevelSystem>();
+        spawner = FindObjectOfType<WaveSpawner>();
+        scoreLogic = FindObjectOfType<scoreLogic>();
 
         health = maxHealth;
+
+        isSneer = false;
     }
 
-    private void Sneer()
+    IEnumerator Sneer()
     {
+            isSneer = true;
             animator.SetBool("isSneer", true);
+            yield return new WaitForSeconds(3f);
+
             enemyAI.speed = 3f;
     }
 
@@ -34,13 +50,16 @@ public class BossLogic : MonoBehaviour
         health -= damage;
         animator.SetTrigger("hurt");
 
-        if(health <= (0.7 * maxHealth))
+        if(health <= (0.7 * maxHealth) && isSneer == false)
         {
-            Sneer();
+            StartCoroutine(Sneer());
+            isSneer = false;
         }
 
         if (health <= 0)
         {
+            spawner.playerWins = true;
+            scoreLogic.AddScore(scoreVal);
             animator.SetBool("isDead", true);
         }
 

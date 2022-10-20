@@ -19,14 +19,15 @@ public class EnemyLogic : MonoBehaviour
     private Animator animator;
 
     [SerializeField]
-    private AudioClip attackDeathAudio;
+    private int scoreVal;
 
-    PlayerController player;
+    scoreLogic scoreLogic;
 
     private void Start ()
     {
         spriteGFX = GetComponentInChildren<SpriteRenderer>();
         PlayerLevel = FindObjectOfType<LevelSystem>();
+        scoreLogic = FindObjectOfType<scoreLogic>();
 
         health = maxHealth;
     }
@@ -55,7 +56,8 @@ public class EnemyLogic : MonoBehaviour
         if (health <= 0)
         {
             Die();
-            PlayerLevel.AddExperience(5);
+            scoreLogic.AddScore(5);
+            PlayerLevel.AddExperience(scoreVal);
             DropLoot(HealthObj);
         }
     }

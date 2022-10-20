@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7291363698417668280}
   - component: {fileID: 7291363698417668281}
   - component: {fileID: 5195068208974054165}
+  - component: {fileID: 5854753934696228345}
   m_Layer: 7
   m_Name: BatEye
   m_TagString: Enemy
@@ -37,7 +38,7 @@ Transform:
   m_Children:
   - {fileID: 7291363700078685127}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7291363698417668284
 MonoBehaviour:
@@ -60,7 +61,7 @@ MonoBehaviour:
   HealthObj: {fileID: 1846396577405823669, guid: 6d7c02be5814bbd4790775c119a7b310,
     type: 3}
   animator: {fileID: 7291363700078685120}
-  attackDeathAudio: {fileID: 8300000, guid: 8005d2611636b0d47a69a3bc1c0e8052, type: 3}
+  scoreVal: 5
 --- !u!114 &7291363698417668285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,6 +279,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5854753934696228345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7291363698417668282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed900bb852affc4bb7d548819df44ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreValue: 5
 --- !u!1 &7291363700078685123
 GameObject:
   m_ObjectHideFlags: 0
