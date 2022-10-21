@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Health
   - Bullet
+  - Boss
+  - EnemyHead
   layers:
   - Default
   - TransparentFX
@@ -19,9 +21,9 @@ TagManager:
   - Enemies
   - Platform
   - Projectiles
-  - 
-  - 
-  - 
+  - Land
+  - Air
+  - Boss
   - 
   - 
   - 

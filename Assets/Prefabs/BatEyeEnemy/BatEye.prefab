@@ -16,8 +16,7 @@ GameObject:
   - component: {fileID: 7291363698417668280}
   - component: {fileID: 7291363698417668281}
   - component: {fileID: 5195068208974054165}
-  - component: {fileID: 5854753934696228345}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: BatEye
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -279,19 +278,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5854753934696228345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7291363698417668282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ed900bb852affc4bb7d548819df44ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreValue: 5
 --- !u!1 &7291363700078685123
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +291,7 @@ GameObject:
   - component: {fileID: 7291363700078685122}
   - component: {fileID: 7291363700078685121}
   - component: {fileID: 2953058538718144419}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: EyeGFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}

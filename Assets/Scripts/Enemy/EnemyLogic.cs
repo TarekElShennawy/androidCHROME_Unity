@@ -56,7 +56,7 @@ public class EnemyLogic : MonoBehaviour
         if (health <= 0)
         {
             Die();
-            scoreLogic.AddScore(5);
+            scoreLogic.AddScore(scoreVal);
             PlayerLevel.AddExperience(scoreVal);
             DropLoot(HealthObj);
         }

@@ -14,6 +14,8 @@ public class LevelSystem : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI levelUI;
 
+    [SerializeField] private int maxLevel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,12 +35,13 @@ public class LevelSystem : MonoBehaviour
             //Level Up!
             level += 1;
             experience = 0f;
-            
-            Screen.ChooseUpgrade();
-            //Time.timeScale = 0;
-            
             levelUI.text = "Lv. " + level.ToString();
             
+            if (level <= maxLevel)
+            {
+                Screen.ChooseUpgrade();
+            }
+
         }
     }
 }

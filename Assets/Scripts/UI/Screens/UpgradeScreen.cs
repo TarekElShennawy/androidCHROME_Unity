@@ -25,6 +25,7 @@ public class UpgradeScreen : MonoBehaviour
     public HealthPoints healthUI;
 
     public ReloadUI reloadUI;
+    
 
     //TODO: Will need to implement a list-like system for upgrades to randomise what upgrades the three buttons provide!!! Currently the upgrade systems changes bools that enable their respective upgrades in Movement and Weapon Controller!
     void Start()

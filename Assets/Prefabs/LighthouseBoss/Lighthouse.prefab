@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 3416767630813192164}
   - component: {fileID: 9168900560390746754}
   - component: {fileID: 1569806690462800983}
-  m_Layer: 7
+  m_Layer: 12
   m_Name: Lighthouse
   m_TagString: Boss
   m_Icon: {fileID: 0}

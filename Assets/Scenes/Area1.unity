@@ -7681,9 +7681,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experience: 0
-  experienceRequired: 20
+  experienceRequired: 50
   Screen: {fileID: 184431215}
   levelUI: {fileID: 1931064306}
+  maxLevel: 5
 --- !u!4 &1145263391
 Transform:
   m_ObjectHideFlags: 0

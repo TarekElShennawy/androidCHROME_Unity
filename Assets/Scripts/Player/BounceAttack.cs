@@ -10,7 +10,14 @@ public class BounceAttack : MonoBehaviour
 
     public AudioSource sfxSource;
 
-    private int bounceScore = 2;
+    private int bounceScore = 3;
+
+    LevelSystem PlayerLevel;
+
+    private void Start ()
+    {
+        PlayerLevel = FindObjectOfType<LevelSystem>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -25,6 +32,7 @@ public class BounceAttack : MonoBehaviour
             var logic = FindObjectOfType<scoreLogic>();
 
             logic.AddScore(bounceScore);
+            PlayerLevel.AddExperience(bounceScore);
             enemy.Die();
         }
     }
